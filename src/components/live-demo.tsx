@@ -199,13 +199,13 @@ function Mira({ screen, interactive }: Props) {
   const works = ["01 Atlas", "02 Hotel Noir", "03 Kin"];
   const [active, setActive] = useState(works[0]);
   return (
-    <div className="h-full bg-[#101010] text-white">
-      <div className="flex justify-between px-8 py-6 text-xs tracking-[0.25em]"><span>MIRA KOVAČ</span><span>PORTFOLIO</span></div>
+    <div className="h-full bg-[#100806] text-[#f4ead8]">
+      <div className="flex justify-between px-8 py-6 text-xs tracking-[0.25em] text-[#d4bc78]"><span>MIRA KOVAČ</span><span>PORTFOLIO</span></div>
       <div className="px-8">
         <h2 className="text-7xl leading-[0.9]">Dizajn koji ostaje u sećanju.</h2>
         <div className="mt-8 grid grid-cols-3 gap-3">
           {works.map((work, index) => (
-            <button key={work} onClick={() => interactive && setActive(work)} className="h-52 text-left" style={{ background: ["#e7d7c1", "#8aa0b4", "#d06a4f"][index], color: "#111" }}>
+            <button key={work} onClick={() => interactive && setActive(work)} className="h-52 border border-[#d4bc78]/30 text-left text-[#f4ead8]" style={{ background: ["#3a241c", "#1a0e0b", "#6e4e30"][index] }}>
               <span className="block p-4 text-2xl">{work}</span>
               {screen === "inner" && active === work && <span className="block px-4">Izabrani rad</span>}
             </button>
@@ -224,24 +224,24 @@ function Forma({ interactive }: Props) {
     Petak: ["08:00 Trčanje", "17:45 Joga"],
   };
   return (
-    <div className="h-full bg-[#121410] text-[#f3f6ef]">
-      <div className="flex justify-between px-8 py-6"><b>FORMA</b><span className="text-[#c6f54e]">Članstvo</span></div>
+    <div className="h-full bg-[#140f0c] text-[#f4ead8]">
+      <div className="flex justify-between px-8 py-6"><b>FORMA</b><span className="tracking-[0.14em] text-[#d4bc78]">Članstvo</span></div>
       <div className="grid grid-cols-[1.2fr_0.8fr] gap-8 px-8">
         <div>
           <h2 className="text-6xl leading-none">Klub za ljude koji se vraćaju.</h2>
           <div className="mt-6 flex gap-3 text-sm">
             {Object.keys(classes).map((item) => (
-              <button key={item} className={day === item ? "text-[#c6f54e]" : "text-white/50"} onClick={() => interactive && setDay(item)}>{item}</button>
+              <button key={item} className={day === item ? "text-[#d4bc78]" : "text-[#f4ead8]/45"} onClick={() => interactive && setDay(item)}>{item}</button>
             ))}
           </div>
           <div className="mt-4 grid gap-2">
-            {classes[day].map((item) => <div key={item} className="border-b border-white/10 py-3 text-2xl">{item}</div>)}
+            {classes[day].map((item) => <div key={item} className="border-b border-[#d4bc78]/20 py-3 text-2xl">{item}</div>)}
           </div>
         </div>
-        <div className="rounded-[32px] bg-[#c6f54e] p-6 text-[#121410]">
-          <p className="text-sm">Neograničeno</p>
-          <p className="mt-6 text-6xl">79€</p>
-          <p className="mt-4">mesečno, bez ugovora u ovom demou</p>
+        <div className="rounded-[32px] border border-[#c9a56a]/45 bg-[linear-gradient(165deg,#3a2418_0%,#24150f_58%,#1a100c_100%)] p-6 text-[#f4ead8] shadow-[inset_0_1px_0_rgba(240,226,192,0.22)]">
+          <p className="text-sm tracking-[0.16em] text-[#d4bc78]">Neograničeno</p>
+          <p className="mt-6 text-6xl text-[#e6d09a]">79€</p>
+          <p className="mt-4 text-[#f4ead8]/75">mesečno, bez ugovora u ovom demou</p>
         </div>
       </div>
     </div>

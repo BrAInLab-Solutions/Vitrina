@@ -104,6 +104,38 @@ body::before {
     radial-gradient(ellipse 34% 40% at 92% 0%, color-mix(in oklab, var(--gold) 14%, transparent), transparent 64%);
 }
 
+/* Thin walnut letvica, both themes. One slat, 12px: outer groove, ridge
+   highlight, walnut face, inner groove. .wrap-wide margin is 1rem (16px),
+   so the slat ends at 12px and leaves a 4px gap before titles and buttons. */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  pointer-events: none;
+  background:
+    linear-gradient(to right,
+      #140e0c 0 1px,
+      #6b5344 1px 2px,
+      #3a2618 2px,
+      #2a1c14 7px,
+      #140e0c 7px 9px,
+      #5c4334 9px 10px,
+      #2a1c14 10px 12px,
+      transparent 12px
+    ),
+    linear-gradient(to left,
+      #140e0c 0 1px,
+      #6b5344 1px 2px,
+      #3a2618 2px,
+      #2a1c14 7px,
+      #140e0c 7px 9px,
+      #5c4334 9px 10px,
+      #2a1c14 10px 12px,
+      transparent 12px
+    );
+}
+
 .hero-stage {
   position: relative;
   isolation: isolate;
