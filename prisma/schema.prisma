@@ -1,0 +1,204 @@
+// Local development uses SQLite so the app runs without a separate database server.
+// The models use portable types. For production, switch provider to "postgresql"
+// and point DATABASE_URL at PostgreSQL. Do not store card data in this schema.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id             String   @id @default(cuid())
+  email          String   @unique
+  passwordHash   String
+  name           String
+  role           String   @default("USER")
+  isSeller       Boolean  @default(false)
+  sellerVerified Boolean  @default(false)
+  disabled       Boolean  @default(false)
+  bio            String   @default("")
+  createdAt      DateTime @default(now())
+
+  listings      Listing[]      @relation("SellerListings")
+  bids          Bid[]
+  favorites     Favorite[]
+  notifications Notification[]
+  wonListings   Listing[]      @relation("WonListings")
+  buyerTx       Transaction[]  @relation("BuyerTx")
+  sellerTx      Transaction[]  @relation("SellerTx")
+  disputes      Dispute[]
+  auditLogs     AuditLog[]
+}
+
+model Category {
+  id       String    @id @default(cuid())
+  slug     String    @unique
+  name     String
+  blurb    String    @default("")
+  listings Listing[]
+}
+
+model Listing {
+  id                  String    @id @default(cuid())
+  slug                String    @unique
+  title               String
+  summary             String
+  description         String
+  categoryId          String
+  category            Category  @relation(fields: [categoryId], references: [id])
+  sellerId            String
+  seller              User      @relation("SellerListings", fields: [sellerId], references: [id])
+  ownership           String
+  status              String
+  startPrice          Int
+  currentBid          Int       @default(0)
+  leadingPrice        Int       @default(0)
+  bidCount            Int       @default(0)
+  startsAt            DateTime?
+  endsAt              DateTime?
+  durationHours       Int       @default(72)
+  demoUrl             String    @default("")
+  coverImageUrl       String    @default("")
+  previewKey          String    @default("signal")
+  features            String    @default("[]")
+  technologies        String    @default("[]")
+  customization       String    @default("")
+  deliverables        String    @default("")
+  transferTerms       String    @default("")
+  includesDomain      Boolean   @default(false)
+  includesHosting     Boolean   @default(false)
+  includesCode        Boolean   @default(true)
+  isDemo              Boolean   @default(false)
+  rejectionReason     String    @default("")
+  endingSoonNotified  Boolean   @default(false)
+  winnerId            String?
+  winner              User?     @relation("WonListings", fields: [winnerId], references: [id])
+  extensions          Int       @default(0)
+  version             Int       @default(0)
+  createdAt           DateTime  @default(now())
+  updatedAt           DateTime  @updatedAt
+
+  images      ListingImage[]
+  bids        Bid[]
+  favorites   Favorite[]
+  transaction Transaction?
+
+  @@index([status, endsAt])
+  @@index([ownership, status])
+  @@index([sellerId])
+}
+
+model ListingImage {
+  id        String  @id @default(cuid())
+  listingId String
+  listing   Listing @relation(fields: [listingId], references: [id], onDelete: Cascade)
+  url       String  @default("")
+  label     String
+  sort      Int     @default(0)
+}
+
+model Bid {
+  id        String   @id @default(cuid())
+  listingId String
+  listing   Listing  @relation(fields: [listingId], references: [id], onDelete: Cascade)
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  amount    Int
+  createdAt DateTime @default(now())
+
+  @@unique([listingId, amount])
+  @@index([listingId, createdAt])
+}
+
+model Favorite {
+  userId    String
+  listingId String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  listing   Listing  @relation(fields: [listingId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@id([userId, listingId])
+}
+
+model Notification {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  type      String
+  title     String
+  body      String
+  href      String   @default("")
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@index([userId, read, createdAt])
+}
+
+model Transaction {
+  id              String    @id @default(cuid())
+  listingId       String    @unique
+  listing         Listing   @relation(fields: [listingId], references: [id])
+  buyerId         String
+  buyer           User      @relation("BuyerTx", fields: [buyerId], references: [id])
+  sellerId        String
+  seller          User      @relation("SellerTx", fields: [sellerId], references: [id])
+  finalPrice      Int
+  commissionRate  Float
+  platformRevenue Int
+  sellerPayout    Int
+  processorFee    Int       @default(0)
+  ownership       String
+  paymentStatus   String    @default("AWAITING")
+  handoverStatus  String    @default("PENDING")
+  payoutStatus    String    @default("NOT_APPLICABLE")
+  paymentRef      String    @default("")
+  buyerNote       String    @default("")
+  adminNote       String    @default("")
+  isDemo          Boolean   @default(false)
+  createdAt       DateTime  @default(now())
+  paidAt          DateTime?
+  disputes        Dispute[]
+
+  @@index([paymentStatus])
+  @@index([payoutStatus])
+}
+
+model Dispute {
+  id            String      @id @default(cuid())
+  transactionId String
+  transaction   Transaction @relation(fields: [transactionId], references: [id])
+  userId        String
+  user          User        @relation(fields: [userId], references: [id])
+  reason        String
+  status        String      @default("OPEN")
+  resolution    String      @default("")
+  createdAt     DateTime    @default(now())
+}
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  actorId   String?
+  actor     User?    @relation(fields: [actorId], references: [id])
+  action    String
+  entity    String
+  entityId  String   @default("")
+  meta      String   @default("{}")
+  createdAt DateTime @default(now())
+
+  @@index([createdAt])
+}
+
+model PlatformSetting {
+  id                     String @id @default("default")
+  commissionRate         Float  @default(0.1)
+  minDurationHours       Int    @default(24)
+  maxDurationHours       Int    @default(336)
+  antiSnipeWindowMinutes Int    @default(3)
+  antiSnipeExtendMinutes Int    @default(3)
+  maxExtensions          Int    @default(8)
+  houseName              String @default("Vitrina Studio")
+}
