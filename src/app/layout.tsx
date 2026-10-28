@@ -12,6 +12,7 @@ import "./globals.css";
 const antique = Cormorant_Garamond({
   subsets: ["latin", "latin-ext"],
   weight: ["500", "600", "700"],
+  style: ["normal", "italic"],
   variable: "--font-antique",
   display: "swap",
 });

@@ -164,7 +164,8 @@ body::after {
   max-width: 12ch;
   font-size: clamp(2.85rem, 5.2vw, 4.6rem);
   line-height: 0.95;
-  letter-spacing: -0.03em;
+  font-style: italic;
+  letter-spacing: -0.015em;
   color: var(--blue);
 }
 
@@ -2619,6 +2620,60 @@ th, td { padding: 0.75rem 0.55rem; border-bottom: 1px solid var(--line); vertica
 
 .glow-hit {
   filter: drop-shadow(0 0 14px color-mix(in oklab, var(--gold) 55%, transparent));
+}
+
+/* Navy click only: a clear gold flash (#e0c17a, burst #f0d48a), the same
+   rich accent the green click uses. Other cards stay navy instead of dimming gray. */
+.dark .glow-burst {
+  background: radial-gradient(circle, #f0d48a, transparent 68%);
+  box-shadow: 0 0 32px #e0c17a;
+}
+
+.dark .glow-hit,
+.dark .brand-logo.glow-hit,
+.dark .brand-logo:active {
+  filter: drop-shadow(0 0 16px color-mix(in oklab, #e0c17a 78%, transparent));
+}
+
+.dark .btn.glow-hit,
+.dark .btn:active {
+  box-shadow:
+    0 0 0 2px color-mix(in oklab, #e0c17a 70%, transparent),
+    0 0 28px color-mix(in oklab, #e0c17a 55%, transparent);
+}
+
+.dark .lot-stack:has(.lot-row.is-lit) .lot-row:not(.is-lit) {
+  opacity: 1;
+  filter: none;
+}
+
+.dark .lot-row.is-lit {
+  background: color-mix(in oklab, #e0c17a 22%, transparent);
+  box-shadow:
+    inset 0 0 0 1px color-mix(in oklab, #e0c17a 55%, transparent),
+    0 0 36px color-mix(in oklab, #e0c17a 42%, transparent);
+}
+
+.dark .lot-row.is-lit .lot-node {
+  background: #e0c17a;
+  box-shadow: 0 0 16px color-mix(in oklab, #e0c17a 75%, transparent);
+}
+
+.dark .lot-row.is-lit .lot-title,
+.dark .lot-row.is-lit .lot-meta {
+  color: #e0c17a;
+}
+
+.dark .stage-card.is-lit,
+.dark .vitrine.is-lit .stage-card,
+.dark .cloud.is-lit .stage-card,
+.dark .orbit-card.is-lit,
+.dark .section-detail.is-lit,
+.dark .section-stage.is-lit .section-detail {
+  border-color: color-mix(in oklab, #e0c17a 62%, var(--line));
+  box-shadow:
+    0 0 0 1px color-mix(in oklab, #e0c17a 40%, transparent),
+    0 0 36px color-mix(in oklab, #e0c17a 38%, transparent);
 }
 
 .reel { overflow: hidden; }
