@@ -39,7 +39,6 @@ export function ActiveAuctions({ items }: { items: CardData[] }) {
       <article className={`section-detail ${lit ? "is-lit" : ""}`}>
         <p className="section-detail-meta">{selected.category}</p>
         <h3 className="serif section-detail-title">{selected.title}</h3>
-        <p className="section-detail-summary">{selected.summary}</p>
         <div className="section-detail-bid">
           <div>
             <p className="stage-bid-label">{selected.bidCount > 0 ? "Trenutna ponuda" : "Početna cena"}</p>

@@ -61,7 +61,7 @@ export function HeroStage({ items }: { items: OrbitItem[] }) {
             <HeroTitle />
             <p className="hero-sense rise">Još nema sajtova. Postavi prvi.</p>
             <div className="hero-actions mt-7 flex flex-wrap gap-3">
-              <Link href="/prodaj" className="btn btn-gold">
+              <Link href="/prodaj" className="btn btn-line">
                 Prodaj sajt
               </Link>
             </div>
@@ -82,9 +82,6 @@ export function HeroStage({ items }: { items: OrbitItem[] }) {
             <span className="brand-word-main">Vitrina</span>
           </p>
           <HeroTitle />
-          <p className="serif hero-line rise" style={{ animationDelay: "0.55s" }}>
-            Dizajn koji osvaja.
-          </p>
           <div className="hero-actions mt-7 flex flex-wrap gap-3">
             <Link href="/aukcije" className="btn btn-gold">
               Istraži aukcije
@@ -104,7 +101,6 @@ export function HeroStage({ items }: { items: OrbitItem[] }) {
 
         <article className={`stage-card ${lit ? "is-lit" : ""}`}>
             <div className="stage-card-top">
-              <p className="orbit-chip">{lit ? "Osvetljen sajt" : "Sajt na aukciji"}</p>
               <span className="stage-card-pos">
                 {active + 1}/{count}
               </span>
@@ -121,7 +117,6 @@ export function HeroStage({ items }: { items: OrbitItem[] }) {
                 <p className="stage-bid-label">ponuda</p>
               </div>
             </div>
-            <p className="stage-blurb">{selected.blurb}</p>
             <div className="orbit-progress">
               {items.map((item, index) => (
                 <button

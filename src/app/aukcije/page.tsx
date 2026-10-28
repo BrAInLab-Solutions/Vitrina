@@ -76,7 +76,7 @@ export default async function AuctionsPage({ searchParams }: { searchParams: Pro
             const next = new URLSearchParams(query);
             next.set("strana", String(index + 1));
             return (
-              <Link key={index} href={`/aukcije?${next.toString()}`} className={`btn btn-sm ${data.page === index + 1 ? "btn-gold" : "btn-ghost"}`}>
+              <Link key={index} href={`/aukcije?${next.toString()}`} className={`btn btn-sm ${data.page === index + 1 ? "btn-line" : "btn-ghost"}`}>
                 {index + 1}
               </Link>
             );

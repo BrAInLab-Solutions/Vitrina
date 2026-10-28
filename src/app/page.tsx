@@ -23,21 +23,18 @@ export default async function HomePage() {
               <span>01</span>
               <div>
                 <strong>Izaberi sajt</strong>
-                <p>Vitrina ga osvetli — vidiš cenu i uslove.</p>
               </div>
             </li>
             <li>
               <span>02</span>
               <div>
                 <strong>Licitiraj</strong>
-                <p>Podigni ponudu dok aukcija traje.</p>
               </div>
             </li>
             <li>
               <span>03</span>
               <div>
                 <strong>Preuzmi</strong>
-                <p>Posle plaćanja stiže kod i prava.</p>
               </div>
             </li>
           </ol>
@@ -45,7 +42,7 @@ export default async function HomePage() {
             <Link href="/kako-funkcionise" className="btn btn-ghost">
               Detaljnije
             </Link>
-            <Link href="/prodaj" className="btn btn-gold">
+            <Link href="/prodaj" className="btn btn-line">
               Prodaj sajt
             </Link>
           </div>

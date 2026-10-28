@@ -36,7 +36,7 @@ export function LiveDemo({
       ? "h-[844px] w-[390px] overflow-hidden"
       : "h-[900px] w-[1440px] overflow-hidden";
   return (
-    <div className={`${frame} ${narrow ? "mobile-shot" : ""}`}>
+    <div className={`${frame} ${narrow ? "mobile-shot" : ""} ${interactive ? "demo-live" : ""}`}>
       <Demo screen={screen} interactive={interactive} />
     </div>
   );
@@ -241,7 +241,7 @@ function Forma({ interactive }: Props) {
         <div className="rounded-[32px] border border-[#c9a56a]/45 bg-[linear-gradient(165deg,#3a2418_0%,#24150f_58%,#1a100c_100%)] p-6 text-[#f4ead8] shadow-[inset_0_1px_0_rgba(240,226,192,0.22)]">
           <p className="text-sm tracking-[0.16em] text-[#d4bc78]">Neograničeno</p>
           <p className="mt-6 text-6xl text-[#e6d09a]">79€</p>
-          <p className="mt-4 text-[#f4ead8]/75">mesečno, bez ugovora u ovom demou</p>
+          <p className="mt-4 text-[#f4ead8]/75">mesečno</p>
         </div>
       </div>
     </div>

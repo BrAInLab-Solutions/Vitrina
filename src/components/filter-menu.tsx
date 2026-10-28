@@ -82,7 +82,7 @@ export function FilterMenu({
               <input name="cenaMax" inputMode="numeric" defaultValue={values.cenaMax} />
             </label>
           </div>
-          <button className="btn btn-gold">Prikaži</button>
+          <button className="btn btn-line">Prikaži</button>
         </form>
       )}
     </div>

@@ -78,12 +78,12 @@ export function SiteHeader({
             </form>
             <ThemeToggle />
             {user ? (
-              <Link href={user.role === "ADMIN" ? "/admin" : "/nalog"} className="btn btn-gold btn-sm">
+              <Link href={user.role === "ADMIN" ? "/admin" : "/nalog"} className="btn btn-line btn-sm">
                 {user.role === "ADMIN" ? "Admin" : "Nalog"}
                 {unread > 0 ? ` ${unread}` : ""}
               </Link>
             ) : (
-              <Link href="/prijava" className="btn btn-gold btn-sm">
+              <Link href="/prijava" className="btn btn-line btn-sm">
                 Prijava
               </Link>
             )}

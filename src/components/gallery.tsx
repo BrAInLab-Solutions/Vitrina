@@ -29,16 +29,16 @@ export function Gallery({
         ) : screen === "mobile" ? (
           <div className="grid place-items-center bg-[var(--bg)] py-8">
             <div className="w-[min(280px,80%)] rounded-[2rem] border border-line bg-black p-2 shadow-2xl">
-              <PreviewFrame previewKey={previewKey} screen="mobile" />
+              <PreviewFrame previewKey={previewKey} screen="mobile" reel />
             </div>
           </div>
         ) : (
-          <PreviewFrame previewKey={previewKey} screen={screen} />
+          <PreviewFrame previewKey={previewKey} screen={screen} reel />
         )}
       </div>
       <div className="mt-3 flex flex-wrap gap-2">
         {screens.map((item) => (
-          <button key={item.id} className={`btn btn-sm ${screen === item.id ? "btn-gold" : "btn-ghost"}`} onClick={() => setScreen(item.id)}>
+          <button key={item.id} className={`btn btn-sm ${screen === item.id ? "btn-line" : "btn-ghost"}`} onClick={() => setScreen(item.id)}>
             {item.label}
           </button>
         ))}

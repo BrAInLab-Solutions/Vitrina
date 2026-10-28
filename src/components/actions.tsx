@@ -137,7 +137,7 @@ export function SettingsForm({
       <label className="field"><span>Produženje, minuti</span><input name="antiSnipeExtendMinutes" type="number" min={1} max={30} defaultValue={antiSnipeExtendMinutes} /></label>
       <label className="field"><span>Najviše produženja</span><input name="maxExtensions" type="number" min={0} max={20} defaultValue={maxExtensions} /></label>
       {error && <p className="text-sm text-danger">{error}</p>}
-      <button className="btn btn-gold w-fit">Sačuvaj podešavanja</button>
+      <button className="btn btn-line w-fit">Sačuvaj podešavanja</button>
     </form>
   );
 }

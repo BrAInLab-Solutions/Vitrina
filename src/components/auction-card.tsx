@@ -47,10 +47,9 @@ export function AuctionCard({ item, index = 0 }: { item: CardData; index?: numbe
       <button type="button" className="lot-hit" onClick={open} aria-label={item.title} />
       <div className="lot-card-top">
         <p className="lot-meta">{item.category}</p>
-        <p className="lot-status">{item.status === "ACTIVE" ? "Aktivna" : "Završeno"}</p>
+        {item.status !== "ACTIVE" ? <p className="lot-status">Završeno</p> : null}
       </div>
       <h3 className="serif lot-title">{item.title}</h3>
-      <p className="lot-summary">{item.summary}</p>
       <div className="lot-card-foot">
         <div className="lot-card-price">
           <p className="lot-price-label">{item.bidCount > 0 ? "Trenutna ponuda" : "Početna cena"}</p>
